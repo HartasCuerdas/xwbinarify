@@ -9,7 +9,7 @@ Code was taken from ["Crossword digitization using image processing" in StackOve
 
 This is a sample image file:
 
-![alt tag](./crossword.jpg)
+![13x13 crossword](./crossword.jpg)
 
 Run program:
 
@@ -33,3 +33,36 @@ We will get this matrix:
 
 - 0s for black shaded squares
 - 1s for white squares
+
+# 15x15 Crossword
+
+Let's consider a different grid. [Crucigrama 6 taken from elcriptico.com](http://elcriptico.com/crucigrama-6/)
+
+![15x15 cryptic crossword](./crucigrama6.png)
+
+In code, we will need to read this file
+
+    img = cv2.imread('crucigrama6.png')
+
+Adjustment to rows and cols variables will be needed
+
+    rows = 15
+    cols = 15
+
+After running python script, we will get the following array:
+
+    [[ 1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  0.  1.  1.  1.  1.]
+     [ 1.  0.  1.  0.  1.  0.  1.  0.  1.  0.  1.  0.  1.  0.  1.]
+     [ 1.  1.  1.  0.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.]
+     [ 1.  0.  1.  0.  1.  0.  1.  0.  1.  0.  1.  0.  1.  0.  1.]
+     [ 1.  1.  1.  1.  1.  0.  1.  1.  1.  1.  1.  1.  1.  1.  0.]
+     [ 1.  0.  1.  0.  1.  0.  0.  0.  1.  0.  1.  0.  1.  0.  0.]
+     [ 1.  1.  1.  1.  1.  1.  1.  0.  1.  0.  0.  1.  1.  1.  1.]
+     [ 1.  0.  0.  0.  1.  0.  1.  0.  1.  0.  1.  0.  0.  0.  1.]
+     [ 1.  1.  1.  1.  0.  0.  1.  0.  1.  1.  1.  1.  1.  1.  1.]
+     [ 0.  0.  1.  0.  1.  0.  1.  0.  0.  0.  1.  0.  1.  0.  1.]
+     [ 0.  1.  1.  1.  1.  1.  1.  1.  1.  0.  1.  1.  1.  1.  1.]
+     [ 1.  0.  1.  0.  1.  0.  1.  0.  1.  0.  1.  0.  1.  0.  1.]
+     [ 1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  0.  1.  1.  1.]
+     [ 1.  0.  1.  0.  1.  0.  1.  0.  1.  0.  1.  0.  1.  0.  1.]
+     [ 1.  1.  1.  1.  0.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.]]
