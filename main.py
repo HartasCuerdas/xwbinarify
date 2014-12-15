@@ -1,13 +1,13 @@
 import numpy as np
 import cv2
 
-img = cv2.imread('crossword.jpg')
+img = cv2.imread('./matrices/crucigrama7.png')
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 ret, thresh = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY_INV)
 thresh2 = cv2.bitwise_not(thresh)
 
-rows = 13
-cols = 13
+rows = 15
+cols = 15
 
 contours,hierarchy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, 1)
 
@@ -25,7 +25,19 @@ for cnt in contours:
 # cut the crossword region, and resize it to a standard size of 130x130
 x,y,w,h = cv2.boundingRect(max_cnt)
 cross_rect = thresh2[y:y+h, x:x+w]
-cross_rect = cv2.resize(cross_rect,(rows*10, cols*10))
+
+#no resizing
+#cross_rect = cv2.resize(cross_rect,(rows*10, cols*10))
+
+width = w
+height = h
+
+# sq = square
+
+sq_w = width/cols
+sq_h = height/rows
+
+sq_a = sq_w * sq_h
 
 # you need to uncomment these lines if your image is rotated
 #new_pts = np.float32([[0,0], [0,129],[129,129],[129,0]])
@@ -35,11 +47,42 @@ cross_rect = cv2.resize(cross_rect,(rows*10, cols*10))
 
 cross = np.zeros((rows, cols))
 
+whiteQuota = 0
+blackQuota = 0
+
+#studied proportion
+areaRef = 1332.0
+minRefForNum = 72
+maxRefForNum = 180
+
+minVal = sq_a * ( minRefForNum / areaRef )
+maxVal = sq_a * ( maxRefForNum / areaRef )
+
 # select each box, if number of white pixels is more than 50, it is white box
 for i in xrange(rows):
     for j in xrange(cols):
-        box = cross_rect[i*10:(i+1)*10, j*10:(j+1)*10]
-        if cv2.countNonZero(box) > 50:
-            cross.itemset((i,j) ,1)
+        # box is defined by intersection of projections
+        # cartesian plot
+        # x increases from up to down
+        # y increases form left to right
+        # image[y1:y2, x1:x2]
+        # rectangle: upper-left (x1,y1), low-right (x2,y2)
+        #box = cross_rect[i*10:(i+1)*10, j*10:(j+1)*10]
+        box = cross_rect[i*sq_h:(i+1)*sq_h, j*sq_w:(j+1)*sq_w]
+
+        whiteQuota = 0
+        blackQuota = 0
+
+        whiteQuota = cv2.countNonZero(box)
+        if whiteQuota > (sq_a/2) :
+            cross.itemset((i,j), 1)
+        blackQuota = sq_a - whiteQuota
+
+        if (i==1) :
+            print(blackQuota)
+
+        ## identify squares with numbers
+        if ( (blackQuota > minVal) and (blackQuota < maxVal) ):
+            cross.itemset((i,j), '2')
 
 print cross
