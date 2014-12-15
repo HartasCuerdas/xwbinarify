@@ -36,9 +36,9 @@ We will get this matrix:
 
 # 15x15 Crossword
 
-Let's consider a different grid. [Crucigrama 6 taken from elcriptico.com](http://elcriptico.com/crucigrama-6/)
+Let's consider a different grid. [Crucigrama 8 taken from elcriptico.com](http://elcriptico.com/crucigrama-8/)
 
-![15x15 cryptic crossword](./data/crucigrama6.png)
+![15x15 cryptic crossword](./data/crucigrama8/crucigrama8.png)
 
 In code, we will need to change the task name
 
