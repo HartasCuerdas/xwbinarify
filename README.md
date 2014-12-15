@@ -9,7 +9,7 @@ Code was taken from ["Crossword digitization using image processing" in StackOve
 
 This is a sample image file:
 
-![13x13 crossword](./crossword.jpg)
+![13x13 crossword](./matrices/crossword.jpg)
 
 Run program:
 
@@ -38,7 +38,7 @@ We will get this matrix:
 
 Let's consider a different grid. [Crucigrama 6 taken from elcriptico.com](http://elcriptico.com/crucigrama-6/)
 
-![15x15 cryptic crossword](./crucigrama6.png)
+![15x15 cryptic crossword](./matrices/crucigrama6.png)
 
 In code, we will need to read this file
 
