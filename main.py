@@ -1,7 +1,9 @@
 import numpy as np
 import cv2
 
-img = cv2.imread('./matrices/crucigrama7.png')
+taskName = 'crucigrama8'
+
+img = cv2.imread('./data/' + taskName + '/' + taskName + '.png')
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 ret, thresh = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY_INV)
 thresh2 = cv2.bitwise_not(thresh)
@@ -46,6 +48,7 @@ sq_a = sq_w * sq_h
 #cross_rect = cv2.warpPerspective(thresh2,M,(130,130))
 
 cross = np.zeros((rows, cols))
+numberCross = np.zeros((rows, cols))
 
 whiteQuota = 0
 blackQuota = 0
@@ -57,6 +60,8 @@ maxRefForNum = 180
 
 minVal = sq_a * ( minRefForNum / areaRef )
 maxVal = sq_a * ( maxRefForNum / areaRef )
+
+k = 1
 
 # select each box, if number of white pixels is more than 50, it is white box
 for i in xrange(rows):
@@ -78,11 +83,10 @@ for i in xrange(rows):
             cross.itemset((i,j), 1)
         blackQuota = sq_a - whiteQuota
 
-        if (i==1) :
-            print(blackQuota)
-
         ## identify squares with numbers
         if ( (blackQuota > minVal) and (blackQuota < maxVal) ):
-            cross.itemset((i,j), '2')
+            numberCross.itemset((i,j), k)
+            k = k + 1
 
-print cross
+np.savetxt('./data/' + taskName + '/' + taskName + '-square-map.txt', cross, fmt='%1d', delimiter=', ')
+np.savetxt('./data/' + taskName + '/' + taskName + '-number-map.txt', numberCross, fmt='%2d', delimiter=', ')
