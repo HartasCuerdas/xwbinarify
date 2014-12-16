@@ -53,13 +53,6 @@ numberCross = np.zeros((rows, cols))
 whiteQuota = 0
 blackQuota = 0
 
-#studied proportion
-areaRef = 1332.0
-minRefForNum = 72
-maxRefForNum = 180
-
-minVal = sq_a * ( minRefForNum / areaRef )
-maxVal = sq_a * ( maxRefForNum / areaRef )
 
 k = 1
 
