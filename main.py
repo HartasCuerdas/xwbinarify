@@ -53,6 +53,9 @@ numberCross = np.zeros((rows, cols))
 whiteQuota = 0
 blackQuota = 0
 
+# min and max values for Squares with Numbers
+minVal = 77
+maxVal = 106
 
 k = 1
 
