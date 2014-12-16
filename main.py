@@ -63,6 +63,10 @@ maxVal = sq_a * ( maxRefForNum / areaRef )
 
 k = 1
 
+# horizontal adjustment
+# could be 0 or 1
+ha = 0
+
 # select each box, if number of white pixels is more than 50, it is white box
 for i in xrange(rows):
     for j in xrange(cols):
@@ -73,7 +77,7 @@ for i in xrange(rows):
         # image[y1:y2, x1:x2]
         # rectangle: upper-left (x1,y1), low-right (x2,y2)
         #box = cross_rect[i*10:(i+1)*10, j*10:(j+1)*10]
-        box = cross_rect[i*sq_h:(i+1)*sq_h, j*sq_w:(j+1)*sq_w]
+        box = cross_rect[i*sq_h:(i+1)*sq_h, ha+j*sq_w:ha+(j+1)*sq_w]
 
         whiteQuota = 0
         blackQuota = 0
